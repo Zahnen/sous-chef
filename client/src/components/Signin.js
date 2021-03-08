@@ -34,29 +34,19 @@ function Signin(){
             <input className="form-control" name="email" type="email" placeholder="Enter email" />
             <label>Password</label>
             <input className="form-control" name="password" type="password" placeholder="Password" />
-            <button variant="success" type="submit">Submit</button>
+            <button className="btn btn-success" type="submit">Submit</button>
         </form>
         <h1>Already have an account?</h1>
         <h1>Sign In</h1>
-        {/* <Form style={{paddingBottom: '50px', width: '36rem'}} onSubmit={doSignIn}>
-          <Form.Group controlId="formBasicSignInEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control name='signinEmail' type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId="formBasicSignInPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control name='signinPassword' type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Remember me" />
-          </Form.Group>
-          <Button variant="success" type="submit">
-            Submit
-          </Button>
-        </Form> */}
+        <form style={{paddingBottom: '50px', width: '36rem'}} onSubmit={doSignIn}>
+            <label>Email address</label>
+            <input className="form-control" name='signinEmail' type="email" placeholder="Enter email" />
+            <label>Password</label>
+            <input className="form-control" name='signinPassword' type="password" placeholder="Password" />
+            <button className="btn btn-success" type="submit">
+              Submit
+            </button>
+        </form>
       </div>
     </>
   );
