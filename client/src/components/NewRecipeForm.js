@@ -1,26 +1,31 @@
 import React from "react";
-// import PropTypes from "prop-types";
-// import { useFirestore } from 'react-redux-firebase';
+import firebase from "../firebase";
+import 'firebase/firestore';
 
 
-function NewRecipeForm(props){
-  // const firestore = useFirestore();
-  // function addRecipeToFirestore(event) {
-  //   event.preventDefault();
-  //   props.onRecipeAdd();
-  //   return firestore.collection('recipes').add(
-  //     {
-  //       title: event.target.title.value,
-  //       author: event.target.author.value,
-  //       ingredients: event.target.ingredients.value,
-  //       instructions: event.target.instructions.value
-  //     }
-  //   );
-  // }
+function NewRecipeForm(){
+  const firestore = firebase.firestore();
+  function addRecipeToFirestore(event) {
+    event.preventDefault();
+    console.log(event.target.title.value);
+    console.log(event.target.author.value);
+    console.log(event.target.ingredients.value);
+    console.log(event.target.instructions.value);
+    firestore.collection('recipes').add(
+      {
+        title: event.target.title.value,
+        author: event.target.author.value,
+        ingredients: event.target.ingredients.value,
+        instructions: event.target.instructions.value
+      }
+    )
+    console.log(event.target.title.value);
+    console.log("done");
+  }
   return (
     <>
       <div className="container" style={{width: '48rem'}}>
-        <form>
+        <form onSubmit={addRecipeToFirestore}>
           <div class="mb-3">
             <label for="title" className="form-label">Title</label>
             <input
@@ -57,28 +62,11 @@ function NewRecipeForm(props){
             <label for="image" class="form-label">Default file input example</label>
             <input class="form-control" type="file" name="image" />
           </div>
-          {/* <Form.Label>Author</Form.Label>
-            <Form.Label>Ingredients</Form.Label>
-            <Form.Control
-              type="text"
-              name="ingredients"
-              placeholder="Ingredients" />
-            <Form.Label>Instructions</Form.Label>
-            <Form.Control
-              type="text"
-              name="instructions"
-              placeholder="Instructions" />
-          <Button variant="success" type="submit">Add Recipe</Button> */}
+          <button variant="success" type="submit">Add Recipe</button>
         </form>
       </div>
     </>
   );
 }
-
-// NewRecipeForm.propTypes = {
-//   onRecipeAdd: PropTypes.func,
-//   formSubmissionHandler: PropTypes.func,
-//   buttonText: PropTypes.string
-// };
 
 export default NewRecipeForm;

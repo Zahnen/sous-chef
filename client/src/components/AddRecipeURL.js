@@ -12,10 +12,7 @@ function App() {
   //'https://www.thespruceeats.com/thin-mint-cookie-pie-5112872';
   //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
   //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
-    //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
-
-
-
+  //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
 
   async function updateRecipeURL(event) {
     event.preventDefault()
