@@ -5,6 +5,8 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
+import 'firebase/auth';
+
 
 ReactDOM.render(
   <React.StrictMode>

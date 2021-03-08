@@ -17,6 +17,9 @@ return(
           <li className="nav-item">
             <Link className="nav-link active" aria-current="page" to="/addrecipe">Add Recipe Manually</Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link active" aria-current="page" to="/signin">Signin</Link>
+          </li>
         </ul>
       </div>
     </div>

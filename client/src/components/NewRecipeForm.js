@@ -1,22 +1,28 @@
-import React from "react";
+import React,  { useState } from "react";
 import firebase from "../firebase";
+import 'firebase/auth';
 import 'firebase/firestore';
 
 
 function NewRecipeForm(){
+  // const auth = useState(firebase.auth());
   const firestore = firebase.firestore();
+  const auth = firebase.auth();
+
+  function getItemsFromTextArea(str) {
+		return str.split(",").map(x => x.trim());
+	}
+
   function addRecipeToFirestore(event) {
     event.preventDefault();
-    console.log(event.target.title.value);
-    console.log(event.target.author.value);
-    console.log(event.target.ingredients.value);
-    console.log(event.target.instructions.value);
     firestore.collection('recipes').add(
       {
         title: event.target.title.value,
         author: event.target.author.value,
-        ingredients: event.target.ingredients.value,
-        instructions: event.target.instructions.value
+        ingredients: getItemsFromTextArea(event.target.ingredients.value),
+        instructions: getItemsFromTextArea(event.target.instructions.value),
+        // imgURL: url,
+        userId: auth[0].currentUser.uid
       }
     )
     console.log(event.target.title.value);
