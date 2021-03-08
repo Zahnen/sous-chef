@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import logo from "./logo.svg";
+import React, {useState} from "react";
+import logo from "../logo.svg";
 import "./App.css";
 import axios from 'axios';
 
@@ -26,25 +26,21 @@ function App() {
 
   if (!data) {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <form onSubmit={updateRecipeURL}>
-            <input type="text" name="url"></input>
-          <button type="submit">Get Recipe</button>
-          </form>
-          <p>LOADING...</p>
-        </header>
+      <div>
+        <img src={logo} className="App-logo" alt="logo" />
+        <form onSubmit={updateRecipeURL}>
+          <input type="text" name="url"></input>
+        <button type="submit">Get Recipe</button>
+        </form>
+        <p>LOADING...</p>
       </div>
     );
   } else {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <ul>{data.ingredients.map((item, index) => <li key={index}>{item}</li>)}</ul>
-          <ul>{data.instructions.map((item, index) => <li key={index}>{item}</li>)}</ul>
-        </header>
+      <div>
+        <img src={logo} className="App-logo" alt="logo" />
+        <ul>{data.ingredients.map((item, index) => <li key={index}>{item}</li>)}</ul>
+        <ul>{data.instructions.map((item, index) => <li key={index}>{item}</li>)}</ul>
       </div>
     );
   }
