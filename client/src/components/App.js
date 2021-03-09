@@ -3,6 +3,7 @@ import AddRecipeURL from './AddRecipeURL';
 import NewRecipeForm from './NewRecipeForm';
 import Signin from './Signin';
 import NavBar from './NavBar';
+import MyRecipes from './MyRecipes';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/signin">
             <Signin/>
+          </Route>
+          <Route path="/myrecipes">
+            <MyRecipes/>
           </Route>
         </Switch>
       </div>
