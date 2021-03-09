@@ -1,24 +1,19 @@
 import React, {useState} from 'react';
-// import firebase from "../firebase";
 import firebase from "firebase/app";
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
 
 function MyRecipes() {
   const recipeRef = firebase.firestore().collection('recipes');
-  const [data, setData] = useState([]);
-
-  async function getRecipes() {
-  const snapshot  = await recipeRef.get();
-  const array = snapshot.docs.map((doc, index) => {
-    return doc.data()
-  })
-  setData(array);
-  console.log(array);
-  console.log(data);
-}
+  const [recipes] = useCollectionData(recipeRef.orderBy('title'), { idField: 'id' });
 
   return(
     <>
-    <button onClick={getRecipes}>Hello</button>
+    {recipes && recipes.map((recipe, index) => 
+          <div key={index}>
+          <h1>{recipe.title}</h1>
+          <h2>{recipe.author}</h2>
+        </div>)}
     </>
   )
 }
