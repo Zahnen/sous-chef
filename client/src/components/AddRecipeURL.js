@@ -2,8 +2,13 @@ import React, {useState} from "react";
 import logo from "../logo.svg";
 import "./App.css";
 import axios from 'axios';
+import firebase from "../firebase";
+import 'firebase/auth';
+import 'firebase/firestore';
 
 function App() {
+  const firestore = firebase.firestore();
+  const auth = firebase.auth();
   const [data, setData] = useState(null);
   //'https://www.bonappetit.com/recipe/lemony-tortellini-soup-with-spinach-and-dill';
   //'https://minimalistbaker.com/vegan-gluten-free-samoas/';
@@ -21,6 +26,19 @@ function App() {
     setData(result.data);
   };
 
+  function addRecipe(event){
+    firestore.collection('recipes').add(
+      {
+        title: data.name,
+        // author: event.target.url.value,
+        ingredients: data.ingredients,
+        instructions: data.instructions,
+        notes: "",
+        imgURL: data.image,
+        userId: auth.currentUser.uid
+      })
+  }
+
   if (!data) {
     return (
       <div>
@@ -29,15 +47,16 @@ function App() {
           <input type="text" name="url"></input>
         <button type="submit">Get Recipe</button>
         </form>
-        <p>LOADING...</p>
       </div>
     );
   } else {
     return (
       <div>
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>{data.name}</h1>
         <ul>{data.ingredients.map((item, index) => <li key={index}>{item}</li>)}</ul>
         <ul>{data.instructions.map((item, index) => <li key={index}>{item}</li>)}</ul>
+        <button onClick={addRecipe}>Add to MyRecipes</button>
       </div>
     );
   }
