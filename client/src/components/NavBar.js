@@ -22,8 +22,8 @@ return(
             <Link className="nav-link active" aria-current="page" to="/myrecipes">My Recipes</Link>
           </li>
         </ul>
-        <div class="collapse navbar-collapse text-right navbarNav">
-            <ul class="navbar-nav ms-auto flex-nowrap">
+        <div className="collapse navbar-collapse text-right navbarNav">
+            <ul className="navbar-nav ms-auto flex-nowrap">
             <li className="nav-item text-right">
               <Link className="nav-link active m-2" aria-current="page" to="/signin">Signin</Link>
             </li>
