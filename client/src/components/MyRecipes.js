@@ -5,6 +5,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import Recipe from './Recipe';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import './MyRecipes.css';
+
 
 function MyRecipes() {
   const auth = firebase.auth();
@@ -36,11 +38,22 @@ function MyRecipes() {
   if (selectedRecipe == null) {
     return(
       <>
-      {recipes && recipes.map((recipe, index) => 
-            <div onClick={() => handleSelectingRecipe(recipe.id)} key={index}>
-            <h1>{recipe.title}</h1>
-            <h2>{recipe.author}</h2>
+      <section className="hero-section">
+      <div className="card-grid">
+      {recipes && recipes.map((recipe, index) =>
+            <div className="card" onClick={() => handleSelectingRecipe(recipe.id)} key={index}>
+            <div className="card__background">
+            <div className="card__content">
+            <h3 className="card__heading">{recipe.title}</h3>
+            <p>{recipe.author}</p>
+            <div className="image-cropper">
+            <img src={recipe.imgURL} alt="recipe hero" className="profile-pic"></img>
+            </div>
+          </div>
+          </div>
           </div>)}
+          </div>
+      </section>
       </>
     )
   } else {
