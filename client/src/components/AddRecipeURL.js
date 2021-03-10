@@ -10,13 +10,12 @@ function App() {
   const firestore = firebase.firestore();
   const auth = firebase.auth();
   const [data, setData] = useState(null);
+  const [url, setUrl] = useState(null);
   //'https://www.bonappetit.com/recipe/lemony-tortellini-soup-with-spinach-and-dill';
   //'https://minimalistbaker.com/vegan-gluten-free-samoas/';
   //'https://www.seriouseats.com/recipes/2021/03/pasta-e-ceci-pasta-with-chickpeas.html';
   //'https://smittenkitchen.com/2006/09/lime-curd-tart/';
   //'https://www.thespruceeats.com/thin-mint-cookie-pie-5112872';
-  //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
-  //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
   //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
 
   async function updateRecipeURL(event) {
@@ -24,17 +23,18 @@ function App() {
     const recipeURL = event.target.url.value
     const result = await axios.post('/', {url: recipeURL});
     setData(result.data);
+    setUrl(recipeURL)
   };
 
   function addRecipe(event){
     firestore.collection('recipes').add(
       {
         title: data.name,
-        // author: event.target.url.value,
         ingredients: data.ingredients,
         instructions: data.instructions,
         notes: "",
         imgURL: data.image,
+        source: url,
         userId: auth.currentUser.uid
       })
   }
