@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import firebase from "../firebase";
 import 'firebase/auth';
 import 'firebase/firestore';
+import Recipe from './Recipe';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 function MyRecipes() {
-  // const auth = firebase.auth();
+  const auth = firebase.auth();
   const firestore = firebase.firestore();
   const recipeRef = firestore.collection('recipes');
-  // const uid = auth.currentUser.uid; //real
-  const uid = 'Sa4M3F7XjBTfIolRAHwsYpGoDPb2'; //test
+  const uid = auth.currentUser.uid;
   const userRecipeRef = firebase.firestore().collection('recipes').where("userId", "==", uid);
   const [recipes] = useCollectionData(userRecipeRef, { idField: 'id' });
   const [selectedRecipe, selectRecipe] = useState(null);
@@ -46,11 +46,8 @@ function MyRecipes() {
   } else {
     return(
       <>
-      <div onClick={resetRecipe}>
-        <h1>You have selected {selectedRecipe.title}</h1>
-        <img src={selectedRecipe.imgURL} alt="Food"></img>
-        <button onClick={resetRecipe}>Back To Recipe List</button>
-      </div>
+      <button onClick={resetRecipe}>Back To Recipe List</button>
+      <Recipe recipe={selectedRecipe} onDeselect={resetRecipe}/>
       </>
     )
   }
