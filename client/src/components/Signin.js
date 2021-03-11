@@ -29,38 +29,55 @@ function Signin(){
     });
   }
 
-  if (signUp === false){
+  function doSignOut() {
+    firebase.auth().signOut().then(function() {
+      console.log("Successfully signed out!");
+    }).catch(function(error) {
+      console.log(error.message);
+    });
+  }
+
+  if (auth.currentUser != null){
+    return (
+      <>
+        <div className="container" style={{marginTop: '5%'}}>
+          <h1 style={{fontWeight: "bold"}}>Signed In</h1>
+          <button className="btn btn-outline-dark" onClick={doSignOut}>Sign Out</button>
+        </div>
+      </>
+    )
+  } else if (auth.currentUser === null && signUp === false){
     return(
       <div className="container" style={{marginTop: '5%'}}>
         <form style={{paddingBottom: '50px', width: '36rem', margin: 'auto'}} onSubmit={doSignIn}>
-          <h1>Sign In</h1>
+          <h1 style={{fontWeight: "bold"}}>Sign In</h1>
           <label>Email address</label>
           <input className="form-control" name='signinEmail' type="email" placeholder="Enter email" />
           <label>Password</label>
           <input className="form-control" name='signinPassword' type="password" placeholder="Password" />
-          <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-success" type="submit">
+          <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-outline-dark" type="submit">
             Submit
           </button>
-          <button style={{marginTop: '20px'}} className="btn btn-success" onClick={() => setSignUp(true)}>
+          <button style={{marginTop: '20px'}} className="btn btn-outline-dark" type="button" onClick={() => setSignUp(true)}>
             Need an account?
           </button>
         </form>
       </div>
     )
-  } else {
+  } else if (auth.currentUser === null) {
     return (
       <>
         <div className="container" style={{marginTop: '5%'}}>
           <form style={{paddingBottom: '50px', width: '36rem', margin: 'auto'}} onSubmit={doSignUp}>
-          <h1>Sign up</h1>
+          <h1 style={{fontWeight: "bold"}}>Sign up</h1>
               <label>Email address</label>
               <input className="form-control" name="email" type="email" placeholder="Enter email" />
               <label>Password</label>
               <input className="form-control" name="password" type="password" placeholder="Password" />
-              <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-success" type="submit">
+              <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-outline-dark" type="submit">
                 Submit
               </button>
-              <button style={{marginTop: '20px'}} className="btn btn-success" onClick={() => setSignUp(false)}>
+              <button style={{marginTop: '20px'}} className="btn btn-outline-dark" type="button" onClick={() => setSignUp(false)}>
                 Already have an account?
               </button>
           </form>
