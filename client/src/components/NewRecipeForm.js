@@ -95,7 +95,7 @@ function NewRecipeForm(){
             <label name="image" className="form-label">Photo</label>
             <input className="form-control" type="file" name="image" onChange={handleChange} />
           </div>
-          {isLoaded ? <button variant="success" onClick={getUrl}>Begin Upload</button> : <button variant="success" type="submit">Complete</button>}
+          {isLoaded ? <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-outline-dark" onClick={getUrl}>Begin Upload</button> : <button style={{marginTop: '20px', marginRight: '20px'}} className="btn btn-outline-dark" type="submit">Complete</button>}
         </form>
       </div>
     </>
@@ -103,21 +103,3 @@ function NewRecipeForm(){
 }
 
 export default NewRecipeForm;
-
-// async function addRecipeToFirestore(event) {
-//   event.preventDefault();
-//   const imageRef = firebase.storage().ref("images").child(`${image.name}`);
-//   imageRef.put(image);
-//   const receivedUrl = await imageRef.getDownloadURL().then(setLoading(false));
-//   firestore.collection('recipes').add(
-//     {
-//       title: event.target.title.value,
-//       author: event.target.author.value,
-//       ingredients: getItemsFromTextArea(event.target.ingredients.value),
-//       instructions: getItemsFromTextArea(event.target.instructions.value),
-//       notes: event.target.notes.value,
-//       imgURL: receivedUrl,
-//       userId: auth.currentUser.uid
-//     }
-//   );
-// }

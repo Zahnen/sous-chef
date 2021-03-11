@@ -5,6 +5,7 @@ import Signin from './Signin';
 import NavBar from './NavBar';
 import Home from './Home';
 import MyRecipes from './MyRecipes';
+import Footer from './Footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
 
@@ -31,6 +32,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      <Footer/>
     </Router>
   );
 }

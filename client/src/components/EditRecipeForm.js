@@ -24,7 +24,6 @@ function EditRecipeForm(props){
       imgURL: recipe.imgURL,
     }
     firestore.collection('recipes').doc(recipe.id).update(propertiesToUpdate);
-    recipe.setEdit(false);
   }
 
   return (

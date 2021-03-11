@@ -11,6 +11,7 @@
     "bootstrap": "^5.0.0-beta2",
     "firebase": "^8.2.10",
     "react": "^17.0.1",
+    "react-alerts": "^0.3.0",
     "react-dom": "^17.0.1",
     "react-firebase-hooks": "^3.0.2",
     "react-router-dom": "^5.2.0",

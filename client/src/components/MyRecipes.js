@@ -29,13 +29,18 @@ function MyRecipes() {
         imgURL: recipe.get("imgURL"),
         ingredients: recipe.get("ingredients"),
         instructions: recipe.get("instructions"),
+        source: recipe.get("source"),
         id: recipe.id
       }
       selectRecipe(firestoreRecipe);
     });
   }
-
-  if (selectedRecipe == null) {
+  if (uid === null){
+    return (
+      <h1>Loading</h1>
+    )
+  }
+  else if (selectedRecipe == null) {
     return(
       <>
       <section className="hero-section">
@@ -59,7 +64,8 @@ function MyRecipes() {
   } else {
     return(
       <>
-      <button onClick={resetRecipe}>Back To Recipe List</button>
+      <button onClick={resetRecipe} className="btn btn-outline-dark">Back To Recipe List</button>
+      <p></p>
       <Recipe recipe={selectedRecipe} onDeselect={resetRecipe}/>
       </>
     )
