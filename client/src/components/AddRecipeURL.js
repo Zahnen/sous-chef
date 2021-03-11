@@ -5,10 +5,13 @@ import axios from 'axios';
 import firebase from "../firebase";
 import 'firebase/auth';
 import 'firebase/firestore';
+import { useHistory } from "react-router-dom"; 
+
 
 function App() {
   const firestore = firebase.firestore();
   const auth = firebase.auth();
+  const history = useHistory();
   const [data, setData] = useState(null);
   const [url, setUrl] = useState(null);
 
@@ -31,6 +34,7 @@ function App() {
         source: url,
         userId: auth.currentUser.uid
       })
+    history.push("/myrecipes");
   }
 
   if (!data) {
