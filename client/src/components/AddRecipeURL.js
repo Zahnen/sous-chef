@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import logo from "../logo.svg";
+import spinner from "./../img/Spinner.svg"
 import "./App.css";
 import axios from 'axios';
 import firebase from "../firebase";
@@ -11,12 +11,6 @@ function App() {
   const auth = firebase.auth();
   const [data, setData] = useState(null);
   const [url, setUrl] = useState(null);
-  //'https://www.bonappetit.com/recipe/lemony-tortellini-soup-with-spinach-and-dill';
-  //'https://minimalistbaker.com/vegan-gluten-free-samoas/';
-  //'https://www.seriouseats.com/recipes/2021/03/pasta-e-ceci-pasta-with-chickpeas.html';
-  //'https://smittenkitchen.com/2006/09/lime-curd-tart/';
-  //'https://www.thespruceeats.com/thin-mint-cookie-pie-5112872';
-  //'https://www.allrecipes.com/recipe/7304/eclair-cake/';
 
   async function updateRecipeURL(event) {
     event.preventDefault()
@@ -41,22 +35,27 @@ function App() {
 
   if (!data) {
     return (
-      <div>
-        <img src={logo} className="App-logo" alt="logo" />
+      <>
+        <div style={{marginBottom: '5%'}}>
+            <img src={spinner} width="180px" className="App-logo d-block mx-auto img-fluid w-70" alt="logo" />
+            <p>Enter a link to a recipe in the box below and let Sous Chef do the rest of the work. If it all looks good, click "Add Recipe" to import the recipe into your recipe box.</p>
         <form onSubmit={updateRecipeURL}>
-          <input type="text" name="url"></input>
-        <button type="submit">Get Recipe</button>
+          <input className="form-control" type="text" name="url"></input>
+        <button style={{marginTop: '20px', marginLeft: 'auto'}} className="btn btn-outline-dark" type="submit">Get Recipe</button>
         </form>
       </div>
+      </>
     );
   } else {
     return (
-      <div>
-        <img src={logo} className="App-logo" alt="logo" />
+      <div style={{marginBottom: '5%'}}>
+        <img src={spinner} width="180px" className="App-logo d-block mx-auto img-fluid w-70" alt="logo" />
         <h1>{data.name}</h1>
+        <h3 style={{fontWeight: "bold"}}>Ingredients</h3>
         <ul>{data.ingredients.map((item, index) => <li key={index}>{item}</li>)}</ul>
+        <h3 style={{fontWeight: "bold"}}>Instructions</h3>
         <ul>{data.instructions.map((item, index) => <li key={index}>{item}</li>)}</ul>
-        <button onClick={addRecipe}>Add to MyRecipes</button>
+        <button style={{marginTop: '20px', marginLeft: 'auto'}} className="btn btn-outline-dark" onClick={addRecipe}>Add to MyRecipes</button>
       </div>
     );
   }
