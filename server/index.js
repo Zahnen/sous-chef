@@ -1,12 +1,15 @@
 const express = require("express");
 const recipeScraper = require("recipe-scraper");
-// const bodyParser = require("body-parser");
+const path = require('path');
+
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 
 app.post('/', async (req, res, next) => {
   console.log(req.body.url)
