@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import firebase from "firebase/app";
 import 'firebase/auth';
+import { useHistory } from "react-router-dom";
+
 
 
 function Signin(){
   const auth = firebase.auth();
   const [signUp, setSignUp] = useState(false);
+  const history = useHistory();
 
   function doSignUp(event) {
     event.preventDefault();
@@ -13,6 +16,7 @@ function Signin(){
     const password = event.target.password.value;
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
       console.log("successfully signed up!");
+      setSignUp(false);
     }).catch(function(error) {
       console.log(error.message);
     });
@@ -24,6 +28,7 @@ function Signin(){
     const password = event.target.signinPassword.value;
     firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
       console.log("Successfully signed in!");
+      history.push("/myrecipes");
     }).catch(function(error) {
       console.log(error.message);
     });
@@ -32,6 +37,7 @@ function Signin(){
   function doSignOut() {
     firebase.auth().signOut().then(function() {
       console.log("Successfully signed out!");
+      history.push("/");
     }).catch(function(error) {
       console.log(error.message);
     });
@@ -41,7 +47,7 @@ function Signin(){
     return (
       <>
         <div className="container" style={{marginTop: '5%'}}>
-          <h1 style={{fontWeight: "bold"}}>Signed In</h1>
+          <h1 style={{fontWeight: "bold"}}>Signed In as {auth.currentUser.email}</h1>
           <button className="btn btn-outline-dark" onClick={doSignOut}>Sign Out</button>
         </div>
       </>

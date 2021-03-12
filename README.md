@@ -36,7 +36,7 @@ If you come across any other bugs, please let me know by [emailing me](mailto:za
 
 ## 🌟 Stretch Goals
 
-Sous Chef was developed to help non-professionals develop/adapt recipes in an intuitive way. In future iterations, Sous Chef will include versioning/version control for recipes to easily track how modifications to a recipe may have affected their outcomes. Outside of this larger endevour, Sous Chef also hopes to be a bit more user friendly in terms of redirecting with form submissions/on-screen alerts.
+Sous Chef was developed to help non-professionals develop/adapt recipes in an intuitive way. In future iterations, Sous Chef will include versioning/version control for recipes to easily track how modifications to a recipe may have affected their outcomes. Outside of this larger endeavor, Sous Chef also hopes to be a bit more user friendly in terms of redirecting with form submissions/on-screen alerts.
 
 ---  
 
