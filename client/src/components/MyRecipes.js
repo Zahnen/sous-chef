@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import firebase from "firebase/app";
 import firebase from "../firebase";
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -11,18 +10,25 @@ import './MyRecipes.css';
 function MyRecipes() {
   const auth = firebase.auth();
   const firestore = firebase.firestore();
-  const recipeRef = firestore.collection('recipes');
-  const uid = auth.currentUser.uid;
+  const [selectedRecipe, selectRecipe] = useState(null);
+  const [uid, setUid] = useState(null);
   const userRecipeRef = firebase.firestore().collection('recipes').where("userId", "==", uid);
   const [recipes] = useCollectionData(userRecipeRef, { idField: 'id' });
-  const [selectedRecipe, selectRecipe] = useState(null);
+  
+  firebase.auth().onAuthStateChanged((user) =>{
+    if(user){
+      setUid(auth.currentUser.uid);
+    }else{
+        console.log("No User is Signed In")
+    }
+  });
 
   function resetRecipe(){
     selectRecipe(null);
   }
 
   function handleSelectingRecipe(id){
-    recipeRef.doc(id).get().then((recipe) => {
+    firestore.collection('recipes').doc(id).get().then((recipe) => {
       const firestoreRecipe = {
         title: recipe.get("title"),
         author: recipe.get("author"),
@@ -37,10 +43,10 @@ function MyRecipes() {
   }
   if (uid === null){
     return (
-      <h1>Loading</h1>
+      <h1>Loading...</h1>
     )
   }
-  else if (selectedRecipe == null) {
+  else if (selectedRecipe == null && uid != null) {
     return(
       <>
       <section className="hero-section">
